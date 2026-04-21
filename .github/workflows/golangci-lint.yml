@@ -1,0 +1,31 @@
+name: golangci-lint
+
+on:
+  workflow_call:
+    inputs:
+      golangci-config-file:
+        required: false
+        type: string
+
+jobs:
+  golangci:
+    name: Lint with golangci-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v6
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          # the go version for golangci-lint, not the go version for our module
+          go-version: 'stable'
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v9
+        env:
+          CONFIG: ${{ case(inputs.golangci-config-file == '', '', format('--config={0}', inputs.golangci-config-file)) }}
+        with:
+          # The golangci-lint version
+          version: v2.6
+          args: ${{ env.CONFIG }} --disable errcheck --disable staticcheck --enable gosec
