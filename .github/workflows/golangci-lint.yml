@@ -28,4 +28,4 @@ jobs:
         with:
           # The golangci-lint version
           version: v2.11
-          args: ${{ env.CONFIG }} --disable errcheck --disable staticcheck --enable gosec
+          args: --config=${{ inputs.golangci-config-file }} --disable errcheck --disable staticcheck --enable gosec
