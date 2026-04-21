@@ -1,0 +1,23 @@
+name: x ModuleDescriptor
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact-id:
+        required: true
+        type: string
+      artifact-version:
+        required: true
+        type: string
+      docker-registry:
+        required: true
+        type: string
+
+jobs:
+  run:
+    uses: julianladisch/.github-folio-org/.github/workflows/go-module-descriptor-generate.yml@master
+    with:
+      artifact-id: ${{ inputs.artifact-id }}
+      artifact-version: ${{ inputs.artifact-version }}
+      docker-registry: ${{ inputs.docker-registry }}
+    
