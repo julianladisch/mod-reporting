@@ -1,0 +1,12 @@
+name: folio-go-lint-errcheck
+on: 
+  workflow_dispatch:
+    inputs:
+      errcheck-excludes-file:
+        required: false
+        type: string
+jobs:
+  job:
+    uses: julianladisch/.github-folio-org/.github/workflows/go-lint-errcheck.yml@master
+    with:
+      errcheck-excludes-file: ${{ inputs.errcheck-excludes-file }}
