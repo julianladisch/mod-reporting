@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-go@v6
         with:
           # the go version for golangci-lint, not the go version for our module
-          go-version: '1.25'
+          go-version: 'stable'
 
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v9
@@ -27,5 +27,5 @@ jobs:
           CONFIG: ${{ case(inputs.golangci-config-file == '', '', format('--config={0}', inputs.golangci-config-file)) }}
         with:
           # The golangci-lint version
-          version: v2.6
+          version: v2.11
           args: ${{ env.CONFIG }} --disable errcheck --disable staticcheck --enable gosec
